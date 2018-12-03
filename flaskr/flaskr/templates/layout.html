@@ -1,0 +1,54 @@
+<!--Layout template page-->
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>World Population</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/skel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/util.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="{{ url_for('static', filename='js/d3-tip.js') }}"></script>
+</head>
+
+<body class="subpage">
+
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <a href="{{ url_for('show_home') }}" class="logo"><strong>World Population</strong></a>
+            <nav id="nav">
+                <a href="{{ url_for('show_home') }} ">Countries</a>
+                <a href="{{ url_for('show_region') }} ">Regions</a>
+                <a href="{{ url_for('show_inspirations') }}">Inspirations</a>
+                <a href="{{ url_for('show_all') }}">Show all countries</a>
+            </nav>
+            <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+        </div>
+    </header>
+
+    <!-- Three -->
+    <section id="three" class="wrapper">
+        <div class="inner">
+            {% block body %}{% endblock %}
+        </div>
+    </section>
+
+    <!-- Scripts -->
+	<script>
+	$(document).ready(function(){
+		$("td").hover(function(){
+			$(this).addClass("hoverBlack");
+			}, function(){
+			$(this).removeClass("hoverBlack");
+		});
+	});
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!--Region page
+    Extends from layout-->
+{% extends "layout.html" %} {% block body %}
+<header class="align-center">
+    <h2>Region Population</h2>
+    <p>Select region below for graph of population of a region every five years</p>
+</header>
+
+<select id="regionCode" name="regionID" form="regionForm">
+    <option value="" disabled selected>Select region</option>
+    {% for region in regions %}
+    <option value="{{region.code}}">{{region.name}}</option>
+    {% endfor %}
+</select>
+
+<!-- When the user changes the region from the selector the Javascript draws a graph
+     displaying population of a selected region-->
+<script src="{{ url_for('static', filename='js/drawD3Chart.js') }}"></script>
+<script>
+    $("#regionCode").change(function() {
+        var codeID = document.getElementById('regionCode');
+        var code = codeID.options[codeID.selectedIndex].value;
+        $.get("/regions/" + code, function(response) {
+            selectedAPI = JSON.parse(response);
+            $.get("/countries/WLD", function(response) {
+                worldAPI = JSON.parse(response);
+                d3.select("svg").remove();
+                drawGraph(worldAPI, selectedAPI);
+            });
+        });
+    });
+</script>
+
+{% endblock %}

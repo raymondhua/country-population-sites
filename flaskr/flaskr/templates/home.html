@@ -1,0 +1,34 @@
+<!--Home page
+    Extends from layout-->
+{% extends "layout.html" %} {% block body %}
+<header class="align-center">
+    <h2>Country Population</h2>
+    <p>Select country below for graph of population of a country every five years</p>
+</header>
+
+<select id="countryCode" name="countryID" form="countryForm">
+    <option value="" disabled selected>Select country</option>
+    {% for country in countries %}
+    <option value="{{country.code}}">{{country.name}}</option>
+    {% endfor %}
+</select>
+
+<!-- When the user changes the country from the selector the Javascript draws a graph
+     displaying population of a selected country-->
+<script src="{{ url_for('static', filename='js/drawD3Chart.js') }}"></script>
+<script>
+    $("#countryCode").change(function() {
+        var codeID = document.getElementById('countryCode');
+        var code = codeID.options[codeID.selectedIndex].value;
+        $.get("/countries/" + code, function(response) {
+            selectedAPI = JSON.parse(response);
+            $.get("/countries/WLD", function(response) {
+                worldAPI = JSON.parse(response);
+                d3.select("svg").remove();
+                drawGraph(worldAPI, selectedAPI);
+            });
+        });
+    });
+</script>
+
+{% endblock %}

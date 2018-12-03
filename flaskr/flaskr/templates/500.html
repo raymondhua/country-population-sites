@@ -1,0 +1,6 @@
+<!--Page that displays 505 error-->
+{% extends "layout.html" %} {% block title %}Internal Server Error{% endblock %} {% block body %}
+<h1>500 - Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+<p><a href="{{ url_for('show_home') }}">Go to home page</a></p>
+{% endblock %}

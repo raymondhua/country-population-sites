@@ -1,0 +1,17 @@
+<!--Insprations page
+    Extends from layout-->
+{% extends "layout.html" %} {% block body %}
+<header class="align-center">
+    <h2>Inspirations</h2>
+</header>
+
+<a href="https://www.gapminder.org/tools/">
+<h3>Gapminder - data visualisation</h3>
+<img src="{{ url_for('static', filename='images/gapminder.jpg') }}" alt="Image not found" width="100%"></a>
+
+<a href="https://templated.co/projection">
+<h3>Projection - bootstrap template</h3>
+<img src="{{ url_for('static', filename='images/projection.png') }}" alt="Image not found" width="100%"></a>
+
+
+{% endblock %}

@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  header.align-center
+    h2 Country Population
+    p Displaying population for all countries every five years
+  table(style='width:100%')
+    tr
+      th Country Name
+      th Country Code
+      th 1960
+      th 1970
+      th 1980
+      th 1990
+      th 2000
+      th 2010
+      th 2016
+    each country in countries
+      tr
+        td #{country.name}
+        td #{country.code}
+        td #{country.in1960}
+        td #{country.in1970}
+        td #{country.in1980}
+        td #{country.in1990}
+        td #{country.in2000}
+        td #{country.in2010}
+        td #{country.in2016}
+  script.
+    $(document).ready(function(){
+    $("td").hover(function(){
+    $(this).addClass("hoverBlack");
+    }, function(){
+    $(this).removeClass("hoverBlack");
+    });
+    });

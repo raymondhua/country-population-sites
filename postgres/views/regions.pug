@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  header.align-center
+    h2 Region Population
+    p Select region below for graph of population of a region every five years
+    
+  select#regionCode(name='countryID' form='countryForm')
+    each region in regions
+      option(value=region.code) #{region.name}
+
+  script(src="https://d3js.org/d3.v4.min.js")
+  script(src="/javascripts/d3-tip.js")
+  script(src="/javascripts/drawD3Chart.js")
+  script.
+    $("#regionCode").change(function() {
+      var codeID = document.getElementById('regionCode');
+      var code = codeID.options[codeID.selectedIndex].value;
+      $.get("/api/regions/" + code, function(response) {
+        selectedAPI = response[0];
+        $.get("/api/countries/WLD", function(response) {
+          worldAPI = response[0];
+          d3.select("svg").remove();
+          drawGraph(worldAPI, selectedAPI);
+        });
+      });
+    });

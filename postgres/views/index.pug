@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  header.align-center
+    h2 Country Population
+    p Select country below for graph of population of a country every five years
+    
+  select#countryCode(name='countryID' form='countryForm')
+    each country in countries
+      option(value=country.code) #{country.name}
+
+  script(src="https://d3js.org/d3.v4.min.js")
+  script(src="/javascripts/d3-tip.js")
+  script(src="/javascripts/drawD3Chart.js")
+  script.
+    $("#countryCode").change(function() {
+      var codeID = document.getElementById('countryCode');
+      var code = codeID.options[codeID.selectedIndex].value;
+      $.get("/api/countries/" + code, function(response) {
+        selectedAPI = response[0];
+        $.get("/api/countries/WLD", function(response) {
+          worldAPI = response[0];
+          d3.select("svg").remove();
+          drawGraph(worldAPI, selectedAPI);
+        });
+      });
+    });

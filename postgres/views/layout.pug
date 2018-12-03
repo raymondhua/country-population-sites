@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    title World Population
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    link(rel='stylesheet' href="/stylesheets/main.css")
+    // Scripts
+    script(src="/javascripts/jquery.min.js")
+    script(src="/javascripts/skel.min.js")
+    script(src="/javascripts/util.js")
+    script(src="/javascripts/main.js")
+  body.subpage
+    // Header
+    header#header
+      .inner
+        a.logo(href="/")
+          strong World Population
+        nav#nav
+          a(href="/") Countries
+          a(href="/region") Regions
+          a(href="/inspirations") Inspirations
+          a(href="/showAll") Show all countries
+        a.navPanelToggle(href='#navPanel')
+          span.fa.fa-bars
+    // Three
+    section#three.wrapper
+      .inner
+        block content

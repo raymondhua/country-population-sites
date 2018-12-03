@@ -1,0 +1,37 @@
+<!--World population
+    Extends from layout-->
+{% extends "layout.html" %} {% block body %}
+<header class="align-center">
+    <h2>Country Population</h2>
+    <p>Displaying population for all countries every five years</p>
+</header>
+<table style="width:100%">
+    <tr>
+        <th>Country Name</th>
+        <th>Country Code</th>
+        <th>1960</th>
+        <th>1970</th>
+        <th>1980</th>
+        <th>1990</th>
+        <th>2000</th>
+        <th>2010</th>
+        <th>2016</th>
+    </tr>
+
+    {% for country in countries %}
+    <tr>
+        <td>{{ country.name }}</td>
+        <td>{{ country.code }}</td>
+        <td>{{ country.in1960 }}</td>
+        <td>{{ country.in1970 }}</td>
+        <td>{{ country.in1980 }}</td>
+        <td>{{ country.in1990 }}</td>
+        <td>{{ country.in2000 }}</td>
+        <td>{{ country.in2010 }}</td>
+        <td>{{ country.in2016 }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}
